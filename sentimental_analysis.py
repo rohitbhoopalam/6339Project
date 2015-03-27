@@ -2,12 +2,21 @@ import nltk.classify.util
 from nltk.classify import NaiveBayesClassifier
 from nltk.tokenize import word_tokenize 
 from nltk.corpus import stopwords
+from nltk.collocations import BigramCollocationFinder
+from nltk.collocations import BigramAssocMeasures
 import random
+import re
  
 def word_feats(words):
-    return dict([(word, True) for word in words])
+    features = dict([(word, True) for word in words])
+    #finder = BigramCollocationFinder.from_words(words)
+    #finder.apply_word_filter(lambda x: False if re.match('\w', x) else True)
+    #bigrams = finder.nbest(BigramAssocMeasures.chi_sq, 20000)
+    #features.update(dict([(bigram, True) for bigram in bigrams]))
+    return features
  
-f = open('review_small.json', 'r')
+#f = open('review_small.json', 'r')
+f = open('review_15000.json', 'r')
 pos_data = []
 neg_data = []
 
